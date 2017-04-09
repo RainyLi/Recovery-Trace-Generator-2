@@ -57,7 +57,7 @@ def FBF_cache_trace(parameter_prefix, dir_path, cache_size):
         else:
             dic[block_position] = 1
 
-    end=time.clock()
+    #end=time.clock()
     # generate trace for disks
     f_origin.seek(0, 0)  # set pointer to start
     for line in f_origin.readlines():
@@ -143,7 +143,7 @@ def FBF_cache_trace(parameter_prefix, dir_path, cache_size):
             # print("append", j, " to List1")
             list1.append(block_position)
             continue
-
+    end = time.clock()
     f_origin.close()
     f_FBF.close()
     return (hit_count/request_count, request_count-hit_count, end-start)

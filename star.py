@@ -4,14 +4,17 @@ import random
 # position is defined as (x,y) instead of a number
 # bug: error disk is only allowed to be disk0, code remains to be improved to allow other disk(see comments in method2)
 
-def star_IO_Generator(prime, error_disk, c):
+def star_IO_Generator(prime, error_disk, c, scheme):
 	recovery_sequence=[]
 	for i in range(c):
 		#the position of the block to be recovered
 		error_block_position=(i,error_disk)
 	
 		#randomly picking the decoding method: 0==horizontal 1==diagnol 2==anti-diagnol
-		recovery_method=(i+2)%3
+		if scheme==1:
+			recovery_method=(i+2)%3
+		else:
+			recovery_method=1
 		#recovery_method=2
 
 		#0---horizontal decoding

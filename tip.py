@@ -8,7 +8,7 @@ import random
 
 # the stripe scale is (p-1)*(p+1)
 
-def tip_IO_Generator(prime, error_disk, c):
+def tip_IO_Generator(prime, error_disk, c, scheme):
     recovery_sequence = []
     for i in range(c):
         # the position of the block to be recovered
@@ -22,7 +22,11 @@ def tip_IO_Generator(prime, error_disk, c):
             recovery_method=2
         # randomly picking the decoding method: 0==horizontal 1==diagnol 2==anti-diagnol
         else:
-            recovery_method = random.randint(0, 2)
+            if scheme == 1:
+                recovery_method = (i + 2) % 3
+            else:
+                recovery_method = 0
+            #recovery_method = random.randint(0, 2)
             #recovery_method=2
 
         # 0---horizontal decoding

@@ -2,14 +2,17 @@ import random
 
 # the stripe scale is (p-1)*(p+2)
 
-def triple_parity_IO_Generator(prime, error_disk, c):
+def triple_parity_IO_Generator(prime, error_disk, c, scheme):
     recovery_sequence = []
     for i in range(c):
         # the position of the block to be recovered
         error_block_position = triple_parity_cal((i, error_disk))
 
         # randomly picking the decoding method: 0==horizontal 1==diagnol 2==anti-diagnol
-        recovery_method = (i + 2) % 3
+        if scheme == 1:
+            recovery_method = (i + 2) % 3
+        else:
+            recovery_method = 0
 
         # 0---horizontal decoding
         if recovery_method == 0:

@@ -2,7 +2,7 @@ import random
 
 # the stripe scale is (p-1)*(p+2)
 
-def triple_star_IO_Generator(prime, error_disk, c):
+def triple_star_IO_Generator(prime, error_disk, c, scheme):
     recovery_sequence = []
     #for each block in the error disk
     for i in range(c):
@@ -11,7 +11,10 @@ def triple_star_IO_Generator(prime, error_disk, c):
         error_block_position = triple_star_cal((i, error_disk))
 
         # randomly picking the decoding method: 0==horizontal 1==anti_diagnol 2==diagnol
-        recovery_method = (i + 2) % 3
+        if scheme == 1:
+            recovery_method = (i + 2) % 3
+        else:
+            recovery_method = 0
 
         # 0---horizontal decoding
         if recovery_method == 0:

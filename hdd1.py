@@ -6,7 +6,7 @@ import random
 
 # the stripe scale is (p-1)*(p+1)
 
-def hdd1_IO_Generator(prime, error_disk, c):
+def hdd1_IO_Generator(prime, error_disk, c, scheme):
     recovery_sequence = []
     for i in range(c):
         # the position of the block to be recovered
@@ -19,9 +19,16 @@ def hdd1_IO_Generator(prime, error_disk, c):
         elif i==prime-2: # if error block is anti-diagnol parity
             recovery_method= random.choice([1,2])
         elif (error_disk - i)% prime==(prime-1): # if error block is missed by diagnol parity
-            recovery_method = random.choice([0,1])
+            if scheme == 1:
+                recovery_method = random.choice([0, 1])
+            else:
+                recovery_method = 0
+            #recovery_method = random.choice([0,1])
         else:
-            recovery_method = (i + 2) % 3
+            if scheme == 1:
+                recovery_method = (i + 2) % 3
+            else:
+                recovery_method = 0
 
         # 0---horizontal decoding
         if recovery_method == 0:
